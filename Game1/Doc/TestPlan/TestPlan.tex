@@ -1,0 +1,639 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Test Plan\\GardenDefender}
+
+\author{Team 29
+		\\ Ashley Williams, willia18
+		\\ Declan Mullane, mullanem
+		\\ Leo Shi, shiy12
+}
+
+\date{October 26, 2018}
+
+%\input{../Comments}
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+October 25 & 1.0 & Updated section 7.2\\
+October 25 & 1.1 & Updated section 3.1 and all subsections\\
+October 26 & 1.2 & Updated sections 1, 2, 3, 4, 5, 6, 7 and all subsections\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+%This document ...
+
+\section{General Information}
+
+\subsection{Purpose}
+
+The purpose of this document is to provide a detailed description of the test plan for the  GardenDefender. The test plan itself aims to prove that the functions of the game execute as specified in the requirements document, that non-functional requirements are met, and to catch and fix any bugs that may arise from testing. 
+
+\subsection{Scope}
+
+Since GardenDefender is a game, the majority of testing will be done manually. It is coded primarily in the JavaScript programming language; as such, Mocha, a test framework designed for JavaScript, will be used for any additional unit testing. Surveys will also be used to test non-functional requirements and usability, where testers will be asked to evaluate properties of the game. 
+
+\subsection{Acronyms, Abbreviations, and Symbols}
+	
+\begin{table}[hbp]
+\caption{\textbf{Table of Abbreviations}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+GUI & Graphical User Interface\\
+FR & Functional Requirements \\
+NFR & Non-Functional Requirements \\ 
+FR-Test& Functional Requirements Test\\
+NFR-Test& Non-Functional Requirements Test\\ 
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\begin{table}[!htbp]
+\caption{\textbf{Table of Definitions}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Term} & \textbf{Definition}\\
+\midrule
+JavaScript & Programming language used to build GardenDefender.\\
+Mocha & Testing framework designed for JavaScript unit tests.\\
+User & The individual who is playing the game. \\
+Player & The graphical representation of the player character. \\
+Enemy & The graphical representation of the enemy character. \\
+Projectiles & The weapon the player fires at enemies to destroy them. \\
+Defensive Line & The left boundary of the GUI. \\
+Health & Numerical value denoting player's health value. \\
+% May need to edit Health definition. 
+Health Bar & Visual representation of the player's health. \\
+Timer & Timer counting down the time until the game play ends. \\
+GUI & Display of the game.\\
+Tester & Individual who will carry out manual testing.\\
+Level & Different stages of progression in the game play. \\
+Game State & The state of the game. \\
+Load State & The initial game state that loads the game assets. \\
+Start State & The game state that allows the user to begin the game. \\
+Main State & The game state where the game play takes place. \\
+Pause State & The game state that allows the user to pause the game play. \\
+Win State & One of the final game states; indicates the user has won. \\
+Lose State & One of the final game states; indicates the user has lost. \\
+\bottomrule
+\end{tabularx}
+
+\end{table}	
+
+\subsection{Overview of Document}
+
+This document describes the tests to be run for functional and non-functional requirements, to ensure that the game executes as expected. It is broken down as described in the table of contents, with specific tests further broken down as automated or manual, dynamic or static.
+
+\section{Plan}
+	
+\subsection{Software Description}
+
+GardenDefender is a basic shooter game where a player fires projectiles at oncoming enemies. As such, the software is responsible for generating and displaying both player and enemies, as well as projectiles. The software also displays the player's health and a timer, where the goal of the game is to prevent the health bar from reaching zero before the timer runs out, at which point the player wins the game. 
+
+The game is divided into separate game states (load, start, main, pause, win, and lose) that track different aspects of the game. 
+
+\subsection{Test Team}
+
+The testing team will include Ashley Williams, Declan Mullane, and Leo Shi. 
+
+\subsection{Automated Testing Approach}
+
+Automated testing is unsuitable for a large portion of the game code. For the code where automated testing is applicable, unit testing will be implemented with Mocha, and will primarily be utilized to ensure that the game proceeds from one game state to the next. 
+
+\subsection{Testing Tools}
+
+Mocha will be the testing tool for unit testing; a survey will collect data on  the satisfaction of non-functional requirements. Manual test cases will also be implemented to supplement cases that cannot be tested automatically. 
+
+\subsection{Testing Schedule}
+		
+See Gantt Chart at the following url: \href{https://gitlab.cas.mcmaster.ca/shiy12/3XA3Group29/blob/master/Game1/ProjectSchedule/ProjectSchedule.pdf}{GardenDefender Gantt Chart} 
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{Game State Transitions}
+
+\begin{enumerate}
+
+\item{F1-Test}
+
+\textbf{Load state to start state} \\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Load state
+					
+Input: The start state is invoked through the load state.
+					
+Output: Start state
+					
+How test will be performed: Upon the start of a new game, the tester will determine if the start screen is displayed in the GUI.
+					
+\item{F2-Test} \\
+\textbf{Start state to main state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Start state
+					
+Input: The space-bar key is pressed
+					
+Output: Main state
+					
+How test will be performed: At the start screen, the tester will press the space-bar key and then determine if the game has begun (player visible, enemies moving, timer started, full health bar).
+
+\item{F3-Test} \\
+\textbf{Main state to pause state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The esc key is pressed.
+					
+Output: Pause state
+					
+How test will be performed: In the main state, the tester will press the esc key and determine if the pause screen is subsequently displayed in the GUI.
+
+\item{F4-Test} \\
+\textbf{Pause state back to main state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Pause state
+					
+Input: The esc key is pressed.
+					
+Output: Main state (game resumed)
+					
+How test will be performed: In the pause state, the tester will press the esc key and determine if their game has been subsequently resumed (player at previous position, timer resumes at previous value, health value hasn't changed, enemies continue their previous path of travel).
+
+\item{F5-Test} \\
+\textbf{Pause state to start state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Pause state
+					
+Input: The enter key is pressed.
+					
+Output: Start state
+					
+How test will be performed: In the pause state, the tester will press the enter key and determine if the initial start screen is subsequently displayed in the GUI.
+
+\item{F6-Test} \\
+\textbf{Main state to lose state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: Health value equal to zero before the timer ends.
+					
+Output: Lose state
+					
+How test will be performed: The tester will allow enemies to surpass the defensive line until the health value becomes zero and then determine if the lose screen is displayed in the GUI.
+
+\item{F7-Test} \\
+\textbf{Win state to start state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Win state
+					
+Input: The space-bar key is pressed.
+					
+Output: Start state
+					
+How test will be performed: In the win state, the tester will press the space-bar key and determine if the initial start screen is subsequently displayed in the GUI.
+
+\item{F8-Test} \\
+\textbf{Lose state to start state}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Lose state
+					
+Input: The space-bar key is pressed.
+					
+Output: Start state
+					
+How test will be performed: In the lose state, the tester will press the space-bar key and determine if the initial start screen is subsequently displayed in the GUI.
+
+\end{enumerate}
+
+\subsubsection{Character Movement and Controls}
+
+\begin{enumerate}
+
+\item{F9-Test} \\
+\textbf{Player can move up}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The 'W' key is pressed.
+					
+Output: The player moves up in the GUI.
+					
+How test will be performed: In the main state, the tester will press the 'W' key and determine if the player moves upwards in the GUI.
+
+\item{F10-Test} \\
+\textbf{Player can move down}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The 'S' key is pressed.
+					
+Output: The player moves down in the GUI.
+					
+How test will be performed: In the main state, the tester will press the 'S' key and determine if the player moves downwards in the GUI.
+
+\item{F11-Test} \\
+\textbf{Player can move left}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The 'A' key is pressed.
+					
+Output: The player moves to the left in the GUI.
+					
+How test will be performed: In the main state, the tester will press the 'A' key and determine if the player moves to the left in the GUI.
+
+\item{F12-Test} \\
+\textbf{Player can move right}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The 'R' key is pressed.
+					
+Output: The player moves to the right in the GUI.
+					
+How test will be performed: In the main state, the tester will press the 'R' key and determine if the player moves to the right in the GUI.
+
+\item{F13-Test} \\
+\textbf{Player can aim and shoot}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: Mouse click
+					
+Output: A projectile moves in the GUI with the correct input trajectory.
+					
+How test will be performed: In the main state, the tester will aim with the mouse and click to shoot.  The tester will determine if a projectile is subsequently displayed in the GUI and moves in the correct trajectory.
+
+\item{F14-Test} \\
+\textbf{Enemies are moving towards defensive line}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: N/A
+					
+Output: Enemies are moving towards the defensive line in the GUI.
+					
+How test will be performed: In the main state, the tester will determine if enemies are moving towards the defensive line in the GUI.
+
+\end{enumerate}
+
+\subsubsection{Game Logic}
+\begin{enumerate}
+\item{F15-Test} \\
+\textbf{Player cannot move out of bounds}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: The player is moved to the boundaries of the GUI (via 'W','A','S','D' key presses).
+					
+Output: The player remains visible in the GUI.
+					
+How test will be performed: The tester will move the player to the left, right, top and bottom boundaries of the GUI.  The tester will verify whether the player remains within display in the GUI at these boundaries.
+
+\item{F16-Test} \\
+\textbf{Enemy behaviour at defensive line}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: An enemy reaches the defensive line.
+					
+Output: The enemy disappears from the GUI and the health value decreases.
+					
+How test will be performed: In the main state, the tester will allow an enemy to reach the defensive line.  They will then determine if the enemy disappears from the GUI when it reaches the defensive line and that the health bar decreases accordingly.
+
+\item{F17-Test} \\
+\textbf{Enemies are killed when hit by projectile}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: An enemy and projectile collide.
+					
+Output: The enemy disappears from the GUI.
+					
+How test will be performed: In the main state, the tester will shoot an enemy with a projectile.  The tester will determine whether the enemy disappears upon collision.
+
+\item{F18-Test} \\
+\textbf{Next level starts after winning one level}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state
+					
+Input: For one level, the health value does not reach zero before the timer ends.
+					
+Output: The next level is started.
+					
+How test will be performed: For one level, the tester must maintain the health value above zero until the timer ends (fend off enemies until the timer ends) and then determine if a new level is started afterwards (timer reset, full health bar).
+
+\item{F19-Test} \\
+\textbf{Winning final level}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: Main state (final level)
+					
+Input: The health value does not reach zero before the timer of the final level ends.
+					
+Output: Win state
+					
+How test will be performed: In the last level, the tester must maintain the health value above zero until the timer ends (fend off enemies until the timer ends) and then determine if the win screen is subsequently displayed in the GUI.
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\subsubsection{Look and Feel Requirement Testing}
+
+\begin{enumerate}
+
+\item{NF1-Test\\}
+
+Type: Structural, Static, Manual
+					
+Initial State: Game launched on a web browser and surveys handed out to our testers.
+					
+Output/Result: More than 80\% of testers agree that the images used in the game are visually pleasing.
+					
+How test will be performed: Our game and survey will be provided to our testers. After exploring the game, they will fill out a survey and give their feedback on the images of the game. Survey data will be collected and analyzed, with the test succeeding if more than 80\% of users agree that the images are pleasing. 
+
+\end{enumerate}
+
+\subsubsection{ Usability Requirement Testing}
+
+\begin{enumerate}
+
+\item{NF2-Test\\}
+
+Type: Structural, Static, Manual
+					
+Initial State: Game accessed via CAS student server.
+					
+Input/Condition: Testers launch game on their own computer.
+					
+Output/Result: Game launches successfully.
+					
+How test will be performed: Our testers will launch the game on their own computer. This test passes if none of the surveys indicate that the game fails to launch.
+
+
+\item{NF3-Test\\}
+
+Type: Structural, Static, Manual
+					
+Initial State: Game launched on a web browser and surveys handed out to testers.
+					
+Input/Condition: Testers give their opinion on if the game is simple and easy to play.
+					
+Output/Result: More than 80\% of testers agree that the game is easy to play.
+					
+How test will be performed: Our game and survey will be provided to our testers. After playing the game, they will fill out a survey and give their feedback on the game's usability and playability. Survey data will be collected and analyzed; this test succeeds if more than 80\% of testers agree that the game is easy to play.
+
+\end{enumerate}
+
+\subsubsection{Performance Testing}
+
+\begin{enumerate}
+
+\item{NF4-Test\\}
+
+Type: Structural, Dynamic, Manual 
+					
+Initial State: Game hosted on CAS student server. Surveys handed out to testers.
+					
+Input/Condition: Tester starts and plays the game. 
+					
+Output/Result: None of the tester survey results indicate game lag when tester attempts to move the character or fire a projectile.
+					
+How test will be performed: After the tester has attempted to play the game on their computer, they will fill out the survey and indicate if the game's performance lagged. The test passes if more than 80\% of survey responses indicate no lag.
+
+\end{enumerate}
+
+\subsubsection{Stress Testing}
+
+\begin{enumerate}
+
+\item{NF5-Test\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Game hosted on CAS student server.
+					
+Input/Condition: Assign twenty users to run the game simultaneously.
+					
+Output/Result: The game runs successfully for each user.
+					
+How test will be performed: Twenty users will be asked to launch the game on the game website simultaneously. This test passes if none of the survey results indicate that the host fails to operate with the load of thirty users.
+
+\end{enumerate}
+
+\subsection{Traceability Between Test Cases and Requirements}
+    \FloatBarrier
+        \begin{table}[!htbp]
+        \begin{tabular}{ll}
+        \toprule
+        Test Cases & Requirements \\
+        \midrule
+        NF1-Test & NFR-01 \\
+        NF2-Test, NF3-Test & NFR-02 \\
+        NF4-Test & NFR-04 \\
+        F1-Test & FR-01 \\
+        F2-Test & FR-02 \\
+        F3-Test & FR-12 \\
+        F4-Test & FR-13 \\
+        F5-Test & FR-14 \\
+        F6-Test & FR-10 \\
+        F7-Test & FR-11, FR-13 \\
+        F8-Test & FR-10 \\
+        F9-Test & FR-03 \\
+        F10-Test & FR-03 \\
+        F11-Test & FR-03 \\
+        F12-Test & FR-03 \\
+        F13-Test & FR-05 \\
+        F14-Test & FR-06 \\
+        F15-Test & FR-04 \\
+        F16-Test & FR-07 \\
+        F17-Test & FR-08 \\
+        F18-Test & FR-09 \\
+        F19-Test & FR-11 \\
+        \bottomrule
+        \end{tabular}
+        \caption{Traceability Between Test Cases and Requirements}
+        \end{table}
+\FloatBarrier
+
+\section{Tests for Proof of Concept}
+
+Tests for the Proof of Concept will focus on displaying all game graphics, main game functions (player and enemy movement, projectile firing, collisions, and health decrements), and switching between game states.  
+
+\subsection{Graphic Display and Game State}
+
+F2-Test \\
+\textbf{Start state to main state}
+
+\noindent Type: Functional, Dynamic, Manual
+					
+\noindent Initial State: Start state
+					
+\noindent Input: The space-bar key is pressed
+					
+\noindent Output: In main state
+					
+\noindent How test will be performed: At the start screen, the tester will press the space-bar key and then determine if the game has begun (player visible, enemies moving, timer started, full health bar).
+		
+
+\subsection{Game Functionality}
+F13-Test \\
+\textbf{Player can aim and shoot}
+
+\noindent Type: Functional, Dynamic, Manual
+					
+\noindent Initial State: Main state
+					
+\noindent Input: Mouse click
+					
+\noindent Output: A projectile moves in the GUI with the correct input trajectory.
+					
+\noindent How test will be performed: In the main state, the tester will aim with the mouse and click to shoot.  The tester will determine if a projectile is subsequently displayed in the GUI and moves in the correct trajectory. \\
+
+\noindent F17-Test \\
+\textbf{Enemies are killed when hit by projectile}
+
+\noindent Type: Functional, Dynamic, Manual
+					
+\noindent Initial State: Main state
+					
+\noindent Input: An enemy and projectile collide.
+					
+\noindent Output: The enemy disappears from the GUI.
+					
+\noindent How test will be performed: In the main state, the tester will shoot an enemy with a projectile.  The tester will determine whether the enemy disappears upon collision. \\
+
+\noindent F16-Test \\
+\textbf{Enemy behaviour at defensive line}
+
+\noindent Type: Functional, Dynamic, Manual
+					
+\noindent Initial State: Main state
+					
+\noindent Input: An enemy reaches the defensive line.
+					
+\noindent Output: The enemy disappears from the GUI and the health value decreases.
+					
+\noindent How test will be performed: In the main state, the tester will allow an enemy to reach the defensive line.  They will then determine if the enemy disappears from the GUI when it reaches the defensive line and that the health bar decreases accordingly.
+
+\section{Comparison to Existing Implementation}	
+
+Our implementation of GardenDefender retains all of the same functionality of the original existing implementation, with some additional functional and non-functional requirements.  For instance, we added a user guide and start screen, different levels, pause and resume functions, and split the game up into separate game states to track different game aspects. 
+				
+\section{Unit Testing Plan}
+All unit testing will be conducted using Mocha.
+		
+\subsection{Unit testing of internal functions}
+
+Most of our tests are manual tests because it's impractical to implement certain unit tests, as many of the functions rely on user input. However, we plan to use unit tests to verify a few parts of our code. 
+
+Specifically, we plan to use unit tests to verify that the game switches between game states correctly. We should be able to write tests that call for a state switch and assert that the game state has changed by comparing the current state with the expected state. Additionally, we will test that all of the game assets load in our load state, so that even though a manual test will be required to ascertain that the images have appeared within the GUI, we will know that they have at least loaded and should be present within the GUI. 
+
+\subsection{Unit testing of output files}
+Our project doesn't have output files where unit testing would be applicable. 
+
+%\bibliographystyle{plainnat}
+
+%\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}
+
+This is where you can place additional information.
+
+%\subsection{Symbolic Parameters}
+
+%The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
+%Their values are defined in this section for easy maintenance.
+
+\subsection{Usability Survey Questions?}
+
+To test the usability of our project, a survey will be administered to 20 people to garner feedback on some of the project's non-functional requirements. The survey will be structured so that the individuals surveyed will respond with "disagree, neutral, or agree" to the survey statements, which are as follows: 
+
+\begin{enumerate}
+    \item The game loads and displays the start screen in your browser of choice. 
+    \item The start screen of the game loaded quickly (in less than three seconds). 
+    \item The rules of the game are easy to understand. 
+    \item The aesthetics (imagery) of the game is appealing.
+    \item The aesthetics (imagery) and text used in the game are not offensive.
+    \item The difficulty level of the game is appropriate for most players age 7 and older. 
+    \item The game runs without delay - it neither lags nor loads slowly - in your browser of choice.  
+    \item The game did not freeze or stop responding while running.
+    \item Playing the game was, overall, an enjoyable experience. 
+    \item The game is enjoyable enough to replay. 
+    \item Playing the game was not, in any way, distressing. 
+\end{enumerate}
+
+\end{document}
