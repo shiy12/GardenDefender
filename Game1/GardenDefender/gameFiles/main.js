@@ -218,19 +218,19 @@ var mainState = {
 
 
         // Construct the timer.
-        gameTime = 30 - parseInt(time / 60);
+        gameTime = 60 - parseInt(time / 60);
         time++;
         timeText.text = 'Time：' + gameTime;
 
         //Change level and difficulty based on remaining time
-        if (gameTime == 20) {
+        if (gameTime == 40) {
             gameLevel = 2;
             if (allowTransition2) {
                 allowTransition2 = false;
                 game.state.start('transition');
             }
         }
-        if (gameTime == 10) {
+        if (gameTime == 20) {
             gameLevel = 3;
             if (allowTransition3) {
                 allowTransition3 = false;

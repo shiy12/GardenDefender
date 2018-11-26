@@ -38,7 +38,7 @@ var loadState = {
         game.load.image('startScreen', 'images2/start.png');
         game.load.image('pauseScreen', 'images2/pause.png');
         game.load.image('enemy2','images2/snake.png');
-        game.load.image('enemy3','images2/bomb.png');
+        game.load.image('enemy3','images2/bird.png');
         game.load.image('transitionScreen','images2/transition2.png');
         game.load.image('bullet4','images2/bullet4alt.png');
 
