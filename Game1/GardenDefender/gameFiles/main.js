@@ -242,14 +242,11 @@ var mainState = {
         // Set conditions for win or lose.
         if (healthvalue < 0 && gameEnd == false) {
             healthvalue = 196;
-            gameTime = 30;
-            time = 0;
             game.state.start('lose');
         } else if (gameTime < 0 && gameEnd == false) {
             game.state.start('win');
             healthvalue = 196;
-            gameTime = 30;
-            time = 0;
+
         }
     },
 

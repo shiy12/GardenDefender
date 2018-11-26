@@ -28,10 +28,13 @@ var startState = {
 	 * @description Initializes a new game, changes from start state to main state.
 	 */
 	start: function() {
+        healthvalue = 196;
 		gameLevel = 1;
+        time = 0;
 		gameTime = 30;
-		time = 0;
 		playerWeapon = 1;
+        allowTransition2 = true;
+        allowTransition3 = true;
 		game.state.start('main');
 	}
 }
