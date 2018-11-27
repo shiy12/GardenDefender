@@ -184,8 +184,8 @@ var mainState = {
         //set bullets rotation
         player.rotation = game.physics.arcade.angleToPointer(player);
         bullets.fireAngle = player.angle;
-        bullets2.fireAngle = player.angle+15;
-        bullets3.fireAngle = player.angle-15;
+        bullets2.fireAngle = player.angle+5;
+        bullets3.fireAngle = player.angle-5;
         bullets4.fireAngle = player.angle;
 
         // Fire bullets.
